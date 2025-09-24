@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doc Converter</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">⚡ DocConverter</div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-text">
+      <h1>Convert Documents Instantly</h1>
+      <p>Transform Word ↔ PDF with just one click. Fast, secure, and beautifully simple.</p>
+      <a href="#converter" class="cta-btn">Start Converting</a>
+    </div>
+    <div class="hero-img">
+      <img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" alt="Docs">
+    </div>
+  </header>
+
+  <!-- Converter Section -->
+  <section id="converter" class="converter">
+    <div class="glass-card">
+      <div class="tab-buttons">
+        <button id="tab-word-btn" class="active" onclick="switchTab('word')">Word → PDF</button>
+        <button id="tab-pdf-btn" onclick="switchTab('pdf')">PDF → Word</button>
+      </div>
+
+      <!-- Word → PDF -->
+      <div id="tab-word" class="tab active">
+        <form action="/word-to-pdf" method="post" enctype="multipart/form-data" class="upload-box">
+          <input type="file" name="file" accept=".docx" required hidden id="word-file">
+          <label for="word-file" class="drop-area">
+            <span>📄 Drag & Drop .docx file or <b>Browse</b></span>
+          </label>
+          <button type="submit" class="btn-glow">Convert</button>
+        </form>
+      </div>
+
+      <!-- PDF → Word -->
+      <div id="tab-pdf" class="tab">
+        <form action="/pdf-to-word" method="post" enctype="multipart/form-data" class="upload-box">
+          <input type="file" name="file" accept=".pdf" required hidden id="pdf-file">
+          <label for="pdf-file" class="drop-area">
+            <span>📑 Drag & Drop .pdf file or <b>Browse</b></span>
+          </label>
+          <button type="submit" class="btn-glow">Convert</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>Made with 💜 by <b>Divyansh</b> | © 2025 DocConverter</p>
+  </footer>
+
+  <script>
+    function switchTab(tab) {
+      document.getElementById("tab-word").classList.remove("active");
+      document.getElementById("tab-pdf").classList.remove("active");
+      document.getElementById("tab-word-btn").classList.remove("active");
+      document.getElementById("tab-pdf-btn").classList.remove("active");
+
+      document.getElementById("tab-" + tab).classList.add("active");
+      document.getElementById("tab-" + tab + "-btn").classList.add("active");
+    }
+  </script>
+</body>
+</html>
